@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+		<groupId>反写公司网址+项目名</groupId>
+		<artifactId>项目名+模块名</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<!--
+			version中书写项目的版本号
+			第一个0表示大版本号
+			第二个0表示分支版本号
+			第三个1表示小版本号
+			snapshot快照版本
+			alpha内测版
+			beta公测版
+			Release稳定版
+			stable稳定版
+			GA正式发布
+		-->
+		<packaging></packaging>
+		<!--
+			packaging打包方式
+			默认是jar
+			还有war，pom，zip，jar等方式
+		-->
+		<name>项目的描述名</name>
+		<url>项目地址</url>
+		<description>项目描述</description>
+		<developers>
+			<developer>开发者<developer>
+		</developers>
+		<licenses>项目证书</licenses>
+		<orgranization>项目所属组织</orgranization>
+		<dependecies>
+			<dependency>
+				<groupId></groupId>
+				<artifactId></groupId>
+				<version></version>
+				<type></type>
+				<scope>依赖传递范围</scope>
+				<optional></optional>
+				<!--
+					设置依赖是否可选，默认是false，子项目是继承的
+					设置为true时，子项目不可以继承，子项目必须显示引入该依赖		
+				-->
+				<exclusions>
+					<exclusion>
+					<exclusion>
+				<exclusions>
+				<!--
+					排除依赖，举例说明，A依赖B,B依赖C C对于A来说属于传递依赖
+					如果A不想依赖C，就可以使用该标签
+				-->
+			</dependency>
+
+			<dependencyManagement>依赖管理标签</dependencyManagement>
+			<!--参加导师课程笔记-->
+			<pluginManagement>插件管理<pluginManagement>
+			<!--参加导师课程笔记-->
+			<build>
+				<plugins>
+					<plugin><plugin>
+				</plugins>		
+			</build>
+
+			<parent></parent><!--用于子模块或者工程继承父工程-->
+			<modules></modules><!--父工程包含哪些子模块-->
+			<settings><settings><!--定义属性，常用来定义依赖版本号-->
+		</dependecies>
+</project>

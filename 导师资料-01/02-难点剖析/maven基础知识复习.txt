@@ -1,0 +1,164 @@
+1.maven  ant  gradle优秀的项目管理构建工具
+
+2.maven约定好的目录结构
+	main/java    ----java代码
+	main/resources    ---配置文件（xml；属性文件）
+	test/java  
+	test/resources
+3.maven的常用构建命令
+
+compile 编译
+test 测试
+package 打包
+clean 删除target
+install 安装jar到本地仓库中
+
+4.maven创建项目的方式
+
+	1.采用archertype插件（骨架）
+	2.不采用骨架
+
+5.maven 中的坐标和仓库
+
+坐标（构件）
+<groupId>
+<artifactId>
+<version>
+
+仓库
+
+1）.本地仓库（修改本地仓库默认位置）
+
+2）.中央仓库（修改中央仓库位置）
+
+5.使用eclipse创建maven项目
+	eclipse中安装maven插件
+	eclipse4.5以上版本无需手动安装maven插件自动集成
+	eclipse默认是运行在jre上面的，而maven运行过程中需要使用到tools.jar，
+	tools.jar存在于jdk包中因此我们需要指定jdk！
+
+6.maven的生命周期和插件
+
+clean  compile  test  package  install
+
+7.完整项目的构建过程
+
+清理 编译 测试 打包 集成测试  验证 部署
+
+8.maven的生命周期
+
+clean   清理项目
+	pre-clean
+	clean
+	post-clean
+
+default 构建项目（核心）
+	compile
+	test
+	package
+	install
+
+site    生成站点
+	pre-site
+	site
+	post-site
+	siite-deploy
+
+使用maven插件进行打包源码---（使用maven源码打包）
+		<build>
+		  <plugins>
+		    <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-source-plugin</artifactId>
+			    <version>2.4</version>
+			      <executions>
+				<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>jar-no-fork</goal>
+					</goals>
+				</execution>
+			</executions>
+		     </plugin>
+		   </plugins>
+		</build>
+9.pom.xml讲解（******）
+
+10.maven的依赖传递
+
+		（简单的理解成继承）表格
+
+11.maven的依赖冲突（面试问题）
+
+（项目里面引入两个依赖（jar包）--都包含另外一个jar包）
+
+1.路径最短原则(使用D中依赖的Xjar)
+A--B--C--X(jar)
+A--D--X
+
+2.路径相同，先声明先使用过原则（使用B中的Yjar）
+A--B--Y(jar)
+A--D--Y(jar)
+A的pom中B的坐标声明在D的前面
+
+12.maven构建项目：
+
+聚合项目    ：打包方式pom
+java项目    ：打包方式jar
+web项 目    ：打包方式war
+。。。。zip  
+
+
+
+补充说明（13-14）：
+
+**使用dependencyManagement管理依赖（优化依赖管理）
+1.作用:
+maven使用dependencyManagement元素（标签）来提供了一种管理项目的所有依赖版本号的方式。一般
+我们会在顶层的父项目中（聚合工程的pom文件中）看到dependencyManagement的身影。
+dependencyManagement可以让所有的子项目在引用一个依赖的时候不用列出具体的版本号。
+maven会沿着父子关系向上走直到找到一个拥有 dependencyManagement元素的项目，
+然后他就会使用在这个dependencyManagement定义的版本号。
+
+2.好处：
+多个子项目都引用同一个依赖，那么就可以避免在所有的子项目里面都声明一个依赖的版本号。
+当你想升级或者切换到另一个版本的时候，只需要在顶层的父容器里的升级版本号即可；
+同时当你的子项目需要特定的版本时只需要在子项目中声明一个version即可。
+
+3.注意：
+在dependencyManagement里面只是声明依赖，不实际引入依赖，因此在子项目里需要显示的声明
+所要使用到的依赖。
+
+
+**使用pluginManagement管理插件（优化插件管理）
+
+作用：
+maven使用pluginManagement元素来提供一种插件管理的方式。maven中的pluginManagement不会
+造成插件的实际行为，只有当子模块中真正配置了plugin元素且其中groupid，artifactid与
+pluginManagement中的相匹配的时候pluginManagement中的配置才会影响实际插件的行为。
+
+
+15.定义项目属性及配置信息
+
+properties元素可以定义任意长度，任意数量的常量
+
+<name>定义项目的名称</name>
+<url>定义项目的访问地址</url>
+<description>定义项目的描述</description>
+<developers>
+  <developer>定义项目的开发者</developer>
+</developers>
+<inceptionYear>定义项目的开发时间</inceptionYear>
+<organization>
+  <name>项目所属组织名</name>
+  <url>项目所属组织地址</url>
+</organization>
+
+
+
+SVN   60%（早期企业）
+		--
+		--
+GIT    20% （新兴企业）
+		--
+CVS    
