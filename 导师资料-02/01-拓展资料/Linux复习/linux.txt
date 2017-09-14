@@ -1,0 +1,203 @@
+Linux的目录结构：
+		
+一、文件夹（目录）操作：
+		
+	1.切换（进入）目录命令：cd
+	cd  /path   切换目录 (cd /) ,如果不带参数则切换到用户主家目录 ~
+						
+						
+	2.	查看目录信息命令：ls   （参数       -l (等价于ll)    -a）    <===> ls -l   <===>ll<===>               ll-a<===> ls  -la
+		ls  /path/  	查看目录信息 
+		ls  -l  /path/  查看详细信息，等价于  ll 
+		ls –a /path/ 	查看隐藏文件					
+		ls  ../		路径的表示方法有“相对路径”和“绝对路径”，比如，如果当前所处目录为 /home/itcast，要查看/home目录下的信息，可以有两种方法：
+		ls  /home				 
+		pwd     查看当前所处目录的绝对路径   
+						
+
+	3.创建目录命令：mkdir
+		mkdir  ./test 		创建文件夹
+		mkdir -p a/b/c  	如果要创建的文件夹的父目录不存在，则自动创建
+				
+	4.删除目录命令：rmdir    或者  rm
+		rmdir  		删除空文件夹  (只能删除空文件夹)
+		rm -r  /a/b 	(删除非空文件夹)
+		rm -rf   abc     abc为多级目录
+					
+						
+	5.重命名目录：mv
+					
+		mv   abc    def	
+	6.cp目录拷贝
+				
+		cp  -r   /itcast     /usr 
+				
+	7.移动目录
+		mv  -r   /itcast     /usr
+ 				
+二、文件操作：
+		
+	1.创建文件命令：  touch   ，echo  ，vi （或者vim）（三种方式）  
+		touch a.avi           															创建一个空文件
+		echo "itcast is the greatest IT School" > itcast.txt          把“>”左边的输出放到右边的文件里去 
+		vi  blabla.txt        															用文本编辑器编辑一个文件并且保存
+
+	2.查看文本文件命令 ：cat ，more  ，less  ，tail  ，head（tail   -f 参数）
+		cat  	log.a.txt  	一次性显示整个文件内容
+		more  	log.a.txt 	可以分页看（翻页：空格, 往回翻：b ，退出： q或者 Ctrl+C）
+		less  log.a.txt 	不仅可以分页，还可以方便地搜索，回翻等操作（翻页：空格,往回翻：↑,往下翻:↓,退出：q或者 Ctrl+C）
+		tail -10 log.a.txt   	查看文件的尾部的10行
+		tail -f user.log   	实时刷新显示文件的尾部，这条命令对于观察调试程序的运行非常重要
+		head -20 log.a.txt 	查看文件的头部20行
+		tail -100 log.log
+		tail -f abc.log
+
+	3.删除文件命令：   rm
+		rm filename  (rm -r  删除文件夹     rm -rf 强制删除文件或文件夹)
+		1.删除目录：
+		单级目录：（空目录）【rmdir】 【 rm -rf】（非空目录）【rm -rf】
+		多级目录：（空目录）【rm -rf】（非空目录）【rm -rf】
+		2.删除文件：
+			文件的位置
+			在当前位置删除当前位置下文件	：rm  
+			[root@localhost aaa]# ll
+			-rw-r--r--. 1 root root 4 6月  21 00:00 aaa.txt
+			[root@localhost aaa]# rm aaa.txt
+			rm：是否删除普通文件 "aaa.txt"？y
+		在当前位置去删其他目录下的文件	 ：rm -rf   [要删除文件的绝对路径]
+			[root@localhost bbb]# ll
+			-rw-r--r--. 1 root root 4 6月  21 00:02 old.txt
+			[root@localhost bbb]# pwd
+			/aaa/bbb
+			[root@localhost ~]# cd aaa
+			[root@localhost aaa]# rm  -rf  /aaa/bbb/old.txt
+			[root@localhost aaa]# 
+														
+		4.修改文本文件命令：  vim  vi 
+			vim     a.txt    
+		5.拷贝文件命令： cp
+			cp   abc.txt       /a/b    把文件abc.txt拷贝（复制）到 /a/b 下
+		6.移动文件命令：mv
+			mv   abc     /a/b	把文件abc.txt移动（剪切）到 /a/b 下
+		7.重命名文件命令：mv
+			mv    abc.txt     哈哈.txt           把abc.txt重名名为哈哈.txt
+		小结命令（mv,cp）
+			····mv    (移动，重命名)
+						
+			......cp		
+						
+		
+三、文件打包（归档）/拆包，压缩/解压缩命令
+				
+		1.打包，拆包（解包）
+			*打包：
+			tar -cvf testdir.tar testdir/
+			参数	c :表示创建一个打包文档
+				v：显示打包的进度
+				f：表示要打成的tar包的名字
+			*拆包：
+				tar –xvf testdir.tar
+			参数x：表示从一个现存的tar文件中进行解包操作
+				
+		2.压缩，解压缩  gzip
+			*压缩
+			gzip testdir.tar         	------->  testdir.tar.gz 
+			*解压缩
+			gzip –d testdir.tar.gz     ------->testdir.tar
+				
+		3.归档并压缩、解压缩    tar(-czvxf,zvxf) ,	zip/unzip
+					tar -czvf  testdir.tar.gz  testdir/        打包并压缩
+					tar -xzvf testdir.tar.gz       解压到当前目录下
+					tar -xzvf testdir.tar.gz  -C Downloads/       解压到指定的Downloads目录下
+									
+					(补充知识压缩格式zip，项目二会用)
+					zip test.txt.zip test.txt
+					unzip test.txt.zip
+									
+		小结
+				1.想对某一些文件进行打包并且压缩：
+				tar   -cvfz     XXX.tar.gz    你想压缩的文件的内容(不用)
+				2.归档解压缩当前目录（偶尔会用）
+				tar  -xvfz     XXX.tar.gz
+				3.归档解压缩当前目录
+				tar  -xvzf     XXX.tar.gz   -C  解压到的指定目录
+									
+									
+			
+								
+四、其他常用命令
+					
+					
+		1.杂项
+						pwd     
+						touch
+						ll -h
+						wget
+						vi和vim
+								--i
+								--esc  退出编辑模式
+								--：
+								--wq （保存并退出）
+								--q!
+								--q
+								
+		2.输出
+						重定向
+						
+						cat                     >        /      >>
+						
+						管道			
+						
+		3.网络命令
+						
+						ifconfig
+						
+					
+							1.开启，关闭，重启网络服务
+							service   network    start/stop/restart(**)
+							2.开启，关闭指定网卡（**）
+							ifconfig  eth0  down  /up  
+							3.查看端口(结合管道)
+							netstat  -an   
+							netstat  -an | grep  某个端口号
+							4.查看ip
+							ifconfig(*****)
+						
+		4.系统命令
+			
+						ps aux | grep  ----   
+						kill  -9
+						
+						小结：
+								1.date  -s  “2017-10-1 15:30:50”
+								2.top    类似于windows的任务管理器
+								3.free  -h   查看我们的内存状态
+								4.df  -h    查看硬盘状态
+								5.ps -ef  | grep   XXX             查找包含XXX的进程               
+								6.kill   进程id   干掉进程
+								   kill  -9   进程id  强杀                                                         
+								7.clear  清屏
+								8.du   -h  显示当前目录下所有文件（目录）的大小信息
+								9.who   当前用户
+								10.hostname
+								11.uname
+								
+		6.用户管理（了解）
+							1.useradd         	添加用户
+							2.passwd				设置密码
+							3.su -  用户名		切换用户
+							4.userdel -r      	删除用户
+				
+				
+
+		5.权限命令（***）
+				了解linux的权限规则
+				1.了解权限
+								
+				2,
+				chmod   u+x         要赋予权限的文件名     给某一文件赋权限（项目二，会写脚本，可执行脚本赋权限）
+				chmod   777		 要赋予权限的文件名
+				chmod   111		 要赋予权限的文件名
+			
+
+			r w -  当前用户    当前用户所在的组   其他用户

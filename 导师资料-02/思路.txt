@@ -1,0 +1,52 @@
+1.商品列表展示功能实现
+	①服务层
+		dao--mapper接口
+		interface--书写接口
+		service--业务操作
+
+		发布服务到注册中心
+	
+	②表现层
+		引用服务
+
+		开发Controller
+
+		页面相关：easyUI控件的使用
+
+2.测试
+
+	有异常：
+		经验积累；
+	
+	没有异常：
+		dubug；
+
+
+3.新增商品
+	
+	①商品类目的选择（树形结构表设计）
+		id
+		parentId
+		isParent
+
+	②图片上传：
+		①上传技术
+			前台：
+			后台：
+		②存储技术：
+			技术选型（为甚吗要使用FastDFS）
+			fastDFS
+	
+		架构：两个角色 tracker ，storage
+
+			上传流程
+			下载流程
+		
+		客户端使用：
+			
+			①原始API
+			②FastDFSClient
+
+
+			
+
